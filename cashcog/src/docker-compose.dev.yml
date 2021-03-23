@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+  backend:
+    environment:
+      APP_MODULE: server.main:api
+      CASHCOG_EXPENSE_STREAM_URL: "https://cashcog.xcnt.io/stream"
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile.dev
+    image: cashcog_backend_dev
+    ports:
+      - "8000:80"
+
+    volumes:
+      # map the src directory to opt/app-root/src
+      - ./backend:/opt/cashcog/src
+      - $HOME/.config/pudb:/root/.config/pudb
+      - backend_site_packages:/usr/local/lib/python3.8/site-packages
+      # Preserve the following directories written by the docker container
+      - /opt/cashcog/backend/fish_history:/root/.local/share/fish/fish_history
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile.dev
+    image: cashcog_frontend_dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # map the src directory to opt/app-root/src
+      - ./frontend:/opt/cashcog/src
+      # Preserve the following directories written by the docker container
+      - /opt/cashcog/frontend/fish_history:/root/.local/share/fish/fish_history
+
+  db:
+    image: mongo:3.6-xenial
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  backend_site_packages:
+  mongodb_data:

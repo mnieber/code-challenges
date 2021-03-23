@@ -1,0 +1,12 @@
+.CharactersListViewItem {
+  @apply hover:text-green-400;
+  @apply cursor-pointer select-none;
+}
+
+.CharactersListViewItem--selected {
+  @apply bg-blue-400;
+}
+
+.CharactersListViewItem--highlighted {
+  @apply border-2 border-white;
+}

@@ -1,0 +1,67 @@
+Roadmap cashCoq
+
+Terminology
+
+Expense - a complete representation of the expense state based on the Expense Event Log
+Expense Event Log - the log of reported expense events and resolution events
+Pending Expense - an expense that does not yet have a Resolution
+Resolution - the decision to either approve or decline an expense
+View Database - a database that is only used for querying that contains Expense records. This database
+                is strictly derived from the expense event log and the resolution event log
+
+
+MS 1 Expenses can be approved (mocked) ✓
+
+0.0 Only mocked data is used in this milestone
+
+1.0 The frontend shows a view with tabs Inbox, All and Confirm
+
+1.1 The Inbox tab shows all pending expenses
+1.1.0 Each entry in the Inbox has a picker for approving or declining the expense
+
+1.2 The All tab shows all expenses
+1.2.0 Each entry shows (e.g. using colour) whether the expense is pending, approved or declined
+1.2.1 The user can see (e.g. using colour) if a pending expense has been resolved in the Inbox
+
+1.3 The Confirm tab shows the pending expenses that have been resolved
+1.3.0 The tab has a button to submit the resolutions
+1.3.1 The tab also shows the total amount for the approved pending expenses, and a field
+      where the user should enter the total approved amount. The submit button is only enabled 
+      if the total approved amount is correctly entered
+
+
+MS 2 Expense and resolution events are received ✓
+
+2.0 The BE listens to the expense event stream
+2.0.1 When the event comes in it is validated against the current (Pydantic) data schema
+2.0.2 If an expense event with this uuid already exists then it is skipped. Otherwise, it is
+      stored in the expense event log.
+2.0.3 The view database is updated with the received expense event
+
+2.1 If the BE receives a resolution then it updates the resolution log and the view database accordingly
+2.1.0 This works similar as how expense events are processed
+
+2.2 The expenses (in the view database) can be queried via a GraphQL interface
+2.2.0 The GraphQL schema is derived from the Pydantic types that are used to validate expense events
+      and resolution events
+
+     
+MS 3 Expenses can be approved (real data) ✓
+
+3.0 The FE retrieves the expenses from the BE
+3.0.1 The FE shows loading status and possible connection errors
+
+3.1 The FE submits the resolutions to the BE
+3.1 After submitting, the FE shows the updated events (where some expenses are no longer pending)
+
+
+MS 4 Tests, pagination, decline reason and type generation
+
+4.0 Expense events are paginated
+
+4.1 Declined expenses can have a associated reason
+4.1.1 A text field appears below the expense if it's marked as declined
+
+4.2 Typescript types in the FE are derived automatically from the BE GraphQL schema
+
+4.3 Write tests

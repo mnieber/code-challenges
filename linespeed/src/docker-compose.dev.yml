@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  backend:
+    environment:
+      APP_MODULE: server.main:api
+      LINESPEED_SERVICE_HOST: "http://localhost:8000"
+      PORT: "8000"
+    build:
+      context: .
+      dockerfile: ./backend/server/Dockerfile.dev
+    image: linespeed_backend_dev
+    ports:
+      - "8000:8000"
+
+    volumes:
+      # map the src directory to opt/app-root/src
+      - ./backend:/app/src
+      - $HOME/.config/pudb:/root/.config/pudb
+      - backend_site_packages:/usr/local/lib/python3.8/site-packages
+      # Preserve the following directories written by the docker container
+      - /app/backend/fish_history:/root/.local/share/fish/fish_history
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile.dev
+    image: linespeed_frontend_dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # map the src directory to opt/app-root/src
+      - ./frontend:/app/src
+      # Preserve the following directories written by the docker container
+      - /app/frontend/fish_history:/root/.local/share/fish/fish_history
+
+volumes:
+  backend_site_packages:

@@ -1,0 +1,5 @@
+graphene
+pydantic
+graphene-pydantic
+pytest-html
+requests

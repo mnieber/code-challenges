@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    command: sleep infinity
+    depends_on: []
+    image: starwars_frontend_dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app/src
+      - ../../react-form-state-context/src:/npm/react-form-state-context
+      - ../../aspiration/src:/npm/aspiration
+      - ../../skandha/src:/npm/skandha
+      - ../../skandha-facets/src:/npm/skandha-facets
+      - ../../skandha-mobx/src:/npm/skandha-mobx

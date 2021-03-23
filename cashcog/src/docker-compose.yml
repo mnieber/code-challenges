@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+  producer:
+    build:
+      context: .
+      dockerfile: ./backend/producer/Dockerfile
+    depends_on:
+      - db
+    environment:
+      PYTHONPATH: "/opt/cashcog/src"
+      CASHCOG_EXPENSE_STREAM_URL: "https://cashcog.xcnt.io/stream"
+    image: cashcog_producer
+
+  server:
+    build:
+      context: .
+      dockerfile: ./backend/server/Dockerfile
+    depends_on:
+      - db
+    environment:
+      PYTHONPATH: "/opt/cashcog/src"
+      APP_MODULE: server.main:api
+    image: cashcog_server
+    ports:
+      - "8000:80"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    depends_on:
+      - server
+    image: cashcog_frontend
+    ports:
+      - "3000:3000"
+
+  db:
+    image: mongo:3.6-xenial
+    ports:
+      - "27017:27017"

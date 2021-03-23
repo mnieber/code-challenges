@@ -1,0 +1,73 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/icons": "^4.2.2",
+    "@craco/craco": "^6.0.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/classnames": "^2.2.11",
+    "@types/jest": "^26.0.15",
+    "@types/lodash": "^4.14.165",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.6",
+    "antd": "^4.6.5",
+    "aspiration": "^0.1.0",
+    "classnames": "^2.2.6",
+    "skandha": "^0.3.0",
+    "skandha-facets": "^0.3.0",
+    "skandha-mobx": "^0.3.0",
+    "graphql": "^15.4.0",
+    "graphql-request": "^3.4.0",
+    "history": "^4.10.1",
+    "jquery": "^3.1.1",
+    "lodash": "^4.17.20",
+    "micro-signals": "^2.1.0",
+    "mobx": "^6.1.8",
+    "mobx-react-lite": "^3.2.0",
+    "node-sass": "^4.0.0",
+    "postcss": "^7",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-form-state-context": "^1.0.15",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.2",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "typescript": "^4.1.2",
+    "use-deep-compare-effect": "^1.6.1",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "prettier-all": "yarn prettier --list-different '**/*.js' '**/*.jsx'",
+    "prettier-all-save": "yarn prettier --write '**/*.js' '**/*.jsx' '**/*.ts' '**/*.tsx'"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "prettier": "2.0.5"
+  }
+}

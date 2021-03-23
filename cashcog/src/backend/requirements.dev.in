@@ -1,0 +1,6 @@
+-r requirements.txt
+pudb==2018.1
+black==19.10b0
+ipdb==0.10.1
+ipython==7.15.0
+isort

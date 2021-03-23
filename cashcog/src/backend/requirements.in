@@ -1,0 +1,9 @@
+graphene
+pydantic
+graphene-pydantic
+pytest-html
+pymongo
+dateparser
+requests
+rx
+httpx

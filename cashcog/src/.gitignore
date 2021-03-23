@@ -1,0 +1,17 @@
+.idea
+__pycache__
+*.retry
+*.pyc
+
+
+db.sqlite3
+static_page.html
+todo.txt
+debug.sls
+.pytest_cache
+test_report.html
+django/assets/
+salt/website/bundles
+salt/website/css
+frontend/src/scss/app.generated.scss
+.vscode

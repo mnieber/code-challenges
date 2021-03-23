@@ -1,0 +1,11 @@
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
+
+RUN pip install --upgrade pip && pip install pip-tools
+
+RUN apt-get update
+RUN apt-get install -y make mlocate nano fish curl
+
+# the server is started in a separate shell
+CMD sleep infinity
+
+WORKDIR /app/src

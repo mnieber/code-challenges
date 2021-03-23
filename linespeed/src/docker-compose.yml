@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./backend/server/Dockerfile
+    environment:
+      PYTHONPATH: "/app/src"
+      APP_MODULE: server.main:api
+      PORT: "8000"
+    image: linespeed_server
+    ports:
+      - "8000:8000"
+    command: /start-reload.sh
+
+  producer:
+    depends_on:
+    - server
+    build:
+      context: .
+      dockerfile: ./backend/producer/Dockerfile
+    environment:
+      PYTHONPATH: "/app/src"
+      LINESPEED_SERVICE_HOST: "http://server:8000"
+    image: linespeed_producer
+
+  frontend:
+    depends_on:
+    - server
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    depends_on:
+      - server
+    image: linespeed_frontend
+    ports:
+      - "3000:3000"
